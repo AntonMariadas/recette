@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification et ajout {% endblock %}
+
+{% block titre %}
+    {% if isModification %}
+    Modification {{ aliment.nom }}
+    {% else %}
+    Ajout d'un aliment
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-6">
+            {% if isModification %}
+                <img src="{{asset('images/aliments/' ~ aliment.image)}}" style="width:25%">
+            {% endif %}
+            <div>{{ form_row(form.imageFile) }}</div>
+            <div>{{ form_row(form.nom, {'attr': {'class': 'text-white bg-dark'}, 'label': 'Nom de l\'aliment'}) }}</div>
+            <div>{{ form_row(form.type) }}</div>
+
+        </div>
+        <div class="col-6">
+            {{ form_widget(form)}}
+        </div>
+    </div>
+    <input type="submit" value="Enregistrer" class="btn btn-primary">
+{{ form_end(form) }}
+{% endblock %}

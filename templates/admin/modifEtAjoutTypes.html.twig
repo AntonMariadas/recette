@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification et ajout {% endblock %}
+
+{% block titre %}
+    Modification {{ type.libelle }}
+{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col">
+        {% if isModif %}
+            <img src="{{asset('images/types/' ~ type.image)}}" style="width: 25%">
+        {%  endif %}
+            <div>{{ form_row(form.imageFile) }}</div>
+            <div>{{ form_row(form.libelle, {'label': 'Nom du type'}) }}</div>
+        </div>
+    </div>
+    <input type="submit" value="Enregistrer" class="btn btn-primary">
+{{ form_end(form) }}
+{% endblock %}

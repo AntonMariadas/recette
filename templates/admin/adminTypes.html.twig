@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Admin {% endblock %}
+
+{% block titre %} Page d'administration type {% endblock %}
+
+
+{% block body %}
+
+{% for flash in app.flashes('success') %}
+    <div class="alert alert-success">{{ flash }}</div>
+{% endfor %}
+
+<a href="{{path('admin_ajout')}}" class="btn btn-success">Ajouter</a>
+<table class="table">
+    <tr class="table-primary">
+        <td>Image</td>
+        <td>Type</td>
+        <td>Actions</td>
+    </tr>
+{% for type in types %}
+    <tr>
+        <td> <img src="{{asset('images/types/' ~ type.image)}}" class="perso_imgAliment img-fluid"> </td>
+        <td> <strong>{{ type.libelle }}</strong></td>
+        <td>
+            <a href="{{path('admin_modif', {'id': type.id})}}" class="btn btn-secondary">Modifier</a>
+            <a href="{{path('admin_supp', {'id': type.id})}}" class="btn btn-danger" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
